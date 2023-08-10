@@ -6,35 +6,36 @@ import solver
 
 def label_leq_label(_left_label, _right_label):
     for left_st in _left_label.st_set:
-        if (not st_leq_label(left_st, generate_joins(_right_label))):
-            return False
-    return True
+        result, reason = st_leq_label(left_st, generate_joins(_right_label))
+        if (not result):
+            return False, reason
+    return True, "Secure"
 
 def st_leq_label(_left_st, _join_sets):
+    res = ""
     for _right_st in _join_sets:
-        if (st_leq_st(_left_st, _right_st)):
-            return True
-    return False
+        result, reason = st_leq_st(_left_st, _right_st)
+        if (result):
+            return True, "Secure"
+        else:
+            res += "\n\t"+str(_left_st)+" ⋢ "+str(_right_st) + "\n\t\tReason "+ reason+"\n"
+
+    return False, res
+
+
 
 def st_leq_st(_left_st, _right_st):
     # Check if the _right_st is well-formed
     if (not is_well_formed(_right_st)):
-        print(">>>> Well-formedness Error!!! ")
-        print(">>>> Symbolic tuple " + str(_right_st) + " is not well-formed!")
-        sys.exit()
+        return False, "Symbolic tuple " + str(_right_st) + " is not well-formed!"
 
     # Check leftTables ⊆ rightTables
     if (not _left_st.table_names.issubset(_right_st.table_names)):
-        print(_left_st.table_names)
-        for t in _left_st.table_names:
-            print(type(t))
-        print(">>>> T: " + str(_left_st.table_names) + " is not a subset of " + str(_right_st.table_names))
-        return False
+        return False, str(_left_st.table_names) + " is not a subset of " + str(_right_st.table_names)
 
     # Check leftColumns ⊆ rightColumns
     if (not _left_st.columns.issubset(_right_st.columns)):
-        print(">>>> π: " + str(_left_st.columns) + " is not a subset of " + str(_right_st.columns))
-        return False
+        return False, str(_left_st.columns) + " is not a subset of " + str(_right_st.columns)
 
     # Check dep(leftPhi) ∪ leftColumns ⊆ rightColumns
     left_total = set()
@@ -42,11 +43,14 @@ def st_leq_st(_left_st, _right_st):
     left_total = left_total.union(_left_st.columns)
 
     if (not left_total.issubset(_right_st.columns)):
-        print(">>>> dep(φ_left) ∪ π_left ⊄ π_right")
-        return False
+        return False, "dep("+ str(_left_st.phi) +") ∪ "+ str(_left_st.columns) +" ⊄ " + str(_right_st.columns)
 
     # check ~(leftPhi -> rightPhi) unsat
-    return not check_formula(_left_st.phi, _right_st.phi)
+    impl = check_formula(_left_st.phi, _right_st.phi)
+    if (not impl):
+        return True, "Secure"
+    else:
+        return False, str(_left_st.phi) +" ⊭ "+ str(_right_st.phi) 
     # return the negation because checkFormula is true if ~(leftPhi -> rightPhi) is sat
     # while isLessThan method should return false if ~(leftPhi -> rightPhi) is sat 
     # because that means (leftPhi |= rightPhi) does not hold.

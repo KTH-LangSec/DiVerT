@@ -23,16 +23,16 @@ class Z3Solver():
         imp = z3.Implies(con_left, con_right)
         self.slv.add(z3.Not(imp))
 
-        if settings.DEBUG:
-            print("Solver:")
-            print("\tFormula: ",end="")
-            print(self.slv)
-            if (self.slv.check().r == 1):
-                print("\tResult: Sat")
-                print("\tModel: ",end="")
-                print(self.slv.model()) 
-            else:
-                print("Result: unSat")
+        # if settings.DEBUG:
+        #     print("Solver:")
+        #     print("\tFormula: ",end="")
+        #     print(self.slv)
+        #     if (self.slv.check().r == 1):
+        #         print("\tResult: Sat")
+        #         print("\tModel: ",end="")
+        #         print(self.slv.model()) 
+        #     else:
+        #         print("Result: unSat")
 
         if (self.slv.check().r == 1):
             return True  # sat

@@ -140,7 +140,7 @@ class Gamma():
     def __str__(self):
         res = "\n"
         for k,v in self.env.items():
-            res += "\t" + str(k) + " ↦ " + helper.str_forzensets(v) + "\n"
+            res += "\t\t" + str(k) + " ↦ " + helper.str_forzensets(v) + "\n"
         res = res[:-1]
         return res
 

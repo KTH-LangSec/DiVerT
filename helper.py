@@ -69,7 +69,12 @@ def str_forzensets(_fsets):
     res += " }"
     return res
     
+def str_label_set(_label_set):
+    res = "\n"
+    for lbl in _label_set:
+        res += "\t\t"+str(lbl)+"\n"
 
+    return res
 
 
 ## Extracts the symbolic tuples from the dependency set

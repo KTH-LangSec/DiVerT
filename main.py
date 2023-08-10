@@ -33,13 +33,14 @@ def extract_dependencies(_source_address):
     program_labels = helper.sts(gamma_f.env[settings.OBSERVER])
 
     if settings.DEBUG:
+        print("#"*25+" DEBUG "+"#"*25)
         print("Gamma final : " + str(gamma_f))
         print()
-        print(settings.OBSERVER+"'s Dependency:\n\t"+settings.OBSERVER+" ↦ " + helper.str_forzensets(gamma_f.env[settings.OBSERVER]))
+        print(settings.OBSERVER+"'s Dependency:\n\t\t"+settings.OBSERVER+" ↦ " + helper.str_forzensets(gamma_f.env[settings.OBSERVER]))
         print()
-        print("Program Labels : " + str(program_labels))
+        print("Program Labels : " + helper.str_label_set(program_labels))
         print()
-        print("Policy Labels : " + str(policy_labels))
+        print("Policy Labels : " + helper.str_label_set(policy_labels))
         print()
 
     check_security(policy_labels, program_labels)
@@ -48,42 +49,54 @@ def extract_dependencies(_source_address):
 def check_security(_policy_labels, _program_labels):
     secure = True
     for prg_label in _program_labels:
-        if (not is_allowed(prg_label,_policy_labels)):
+        result, reason = is_allowed(prg_label,_policy_labels)
+        if (not result):
             secure = False
-            # TODO, add more info on why
+            if (settings.REASON):
+                print("#"*25+" REASON(S) "+"#"*25)
+                print("Because: "+ reason)
+            break
 
+    print("#"*25+" VERDICT "+"#"*25)
     if secure:
-        print("\n>>> The program is secure.")
+        print("\n>>> The program is secure. ✓\n")
     else:
-        print("\n>>> The program is insecure.")
+        print("\n>>> The program is insecure. ⨉\n")
 
 
 def is_allowed(_prg_label, _policy_labels):
     if not _policy_labels:
-        print(">>> No Policy!")
-        return True
+        return False, "No policy definition was found!"
     
+    res = ""
     for pol_label in _policy_labels:
-        if (_prg_label.is_less_than(pol_label)):
-            return True
-    return False
+        result, reason = _prg_label.is_less_than(pol_label)
+        if (result):
+            return True, "Secure"
+        else:
+            res += str(reason)
+
+    return False, res
 
 
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
 
-    arg_parser.add_argument("-i", "--input", type=str, help="Address the of source code")
-    arg_parser.add_argument("-o", "--observer", type=str, help="The observer's variable'")
-    arg_parser.add_argument('-d', action='store_true', help='Enable debug mode')
+    arg_parser.add_argument("-i", type=str, help="Address the of source code")
+    arg_parser.add_argument("-o", type=str, help="The observer's identifier (e.g. u)")
+    arg_parser.add_argument('-d', action='store_true', help='Enable debug mode (prints gamma, program and policy labels)')
+    arg_parser.add_argument('-r', action='store_true', help='Prints the reasons for rejecting the program')
     args = arg_parser.parse_args()
 
     if args.d:
         settings.DEBUG = True
-    if args.observer:
+    if args.r:
+        settings.REASON = True
+    if args.o:
         settings.OBSERVER = args.observer
 
-    if args.input:
-        extract_dependencies(args.input)
+    if args.i:
+        extract_dependencies(args.i)
     else:
         print(">>> Please provide the address of the source code")
         print()
