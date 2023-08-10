@@ -1,0 +1,10 @@
+while (z > 0) do
+{
+    m = x + m;
+    k = w;
+    out(k,ama);
+    q = m;
+    d = q;
+    y = d;
+}
+out(y,usr);

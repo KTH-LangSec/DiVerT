@@ -1,0 +1,16 @@
+@Table(emp, n:str, r:str, s:int)@
+@Table(mng, d:str, m:str)@
+
+@Policy(SELECT s FROM emp WHERE s > 0; | SELECT n,r FROM emp; )@
+
+if (z > 10) then
+{
+    x = @Query(SELECT s FROM emp WHERE s = -1000;)@;
+}
+else
+{
+    x = @Query(SELECT n FROM emp WHERE r = 'CEO';)@;
+}
+
+out(x,usr);
+

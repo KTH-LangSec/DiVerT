@@ -1,0 +1,8 @@
+@Table(Patients, zip:int, gender:str, disease:str)@
+
+@Policy(SELECT gender, disease FROM Patients; |
+        SELECT zip, gender FROM Patients; |
+        SELECT zip, disease FROM Patients; )@
+
+query = @Query(SELECT disease FROM Patients WHERE gender = 'F' AND zip = 10001;)@;
+out(query,usr);

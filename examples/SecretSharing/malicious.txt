@@ -1,0 +1,20 @@
+@Table(Shares, shareID:int, shareVal:int)@
+
+@Policy(SELECT shareID, shareVal FROM Shares WHERE shareID = 1; | 
+        SELECT shareID, shareVal FROM Shares WHERE shareID = 2; | 
+        SELECT shareID, shareVal FROM Shares WHERE shareID = 3; | 
+        SELECT shareID, shareVal FROM Shares WHERE shareID = 4; )@
+
+s1 = @Query(SELECT shareVal FROM Shares WHERE shareID = 1;)@;
+out(s1, usr);
+s1 = @Query(SELECT shareVal FROM Shares WHERE shareID = 2;)@;
+out(s1, usr);
+
+s2 = @Query(SELECT shareVal FROM Shares WHERE shareID = 2;)@;
+out(s1, u2);
+
+s3 = @Query(SELECT shareVal FROM Shares WHERE shareID = 3;)@;
+out(s1, u3);
+
+s4 = @Query(SELECT shareVal FROM Shares WHERE shareID = 4;)@;
+out(s1, u4);

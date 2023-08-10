@@ -1,0 +1,13 @@
+@Table(Items, itemID:int, name:str, data:str)@
+
+
+@Policy(SELECT data, name FROM Items WHERE name = 'Movie'; SELECT data, name FROM Items WHERE name = 'CinemaTicket'; |
+        SELECT data, name FROM Items WHERE name = 'Audiobook'; SELECT data, name FROM Items WHERE name = 'ebook'; | 
+        SELECT data, name FROM Items WHERE name = 'CinemaTicket'; SELECT data, name FROM Items WHERE name = 'ebook'; |
+        SELECT data, name FROM Items WHERE name = 'GymMem'; )@
+
+query1 = @Query(SELECT data FROM Items WHERE name = 'Movie';)@;
+query2 = @Query(SELECT data FROM Items WHERE name = 'Audiobook';)@;
+
+out(query1,usr);
+out(query2,usr);

@@ -1,0 +1,11 @@
+@Table(Distance, userID:int, pName:str, distance:int, location:str)@
+
+@Policy(SELECT userID, pName, distance FROM Distance WHERE userID=1 AND pName = 'restaurant'; SELECT userID, pName, distance FROM Distance WHERE userID=2 AND pName = 'restaurant'; |
+        SELECT userID, pName, distance FROM Distance WHERE userID=1 AND pName = 'restaurant'; SELECT userID, pName, distance FROM Distance WHERE userID=2 AND pName = 'mall'; |
+        SELECT userID, pName, distance FROM Distance WHERE userID=1 AND pName = 'mall'; SELECT userID, pName, distance FROM Distance WHERE userID=2 AND pName = 'restaurant'; |
+        SELECT userID, pName, distance FROM Distance WHERE userID=1 AND pName = 'mall'; SELECT userID, pName, distance FROM Distance WHERE userID=2 AND pName = 'mall'; )@
+
+query = @Query(SELECT distance FROM Distance WHERE userID=1 AND pName = 'mall';)@;
+
+out(query,usr);
+
