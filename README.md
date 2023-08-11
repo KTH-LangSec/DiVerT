@@ -20,7 +20,7 @@ You can run the benchmarks and the use cases using the following commnad:
 
 ### Available arguments
 
-- To specify the input source program, one shall use the `-i` argument. In this case it is `examples/DataPublishing/get_data.txt`, which is the secure example of the Data Publishing use case.
-- Debug information, including the final Gamma environment, the observer's dependency set, program labels, and policy labels, can be displayed using the `-d` argument.
-- In instances where the program is insecure, the `-r` argument will provide insights into the reasons for the program's rejection.
+- To specify the input source program, one should use the `-i` argument. In this case it is `examples/DataPublishing/get_data.txt`, which is the secure example of the Data Publishing use case.
+- Debug information, including the final Gamma environment, the observer's dependency set, program labels, and policy labels, can be displayed by specifying the `-d` argument.
+- In instances where the program is insecure, specifying the `-r` argument will provide insights into the reasons for the program's rejection.
 - The observer's identifier can be (optionally) defined using the `-o` argument. In this case (and by default) it is `usr`.
