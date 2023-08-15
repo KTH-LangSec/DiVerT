@@ -1,0 +1,14 @@
+@Table(emp, n:str, r:str, s:int)@
+@Policy(SELECT n,s FROM emp; | SELECT n,r FROM emp; )@
+
+y = True;
+while (y != True) do
+{
+    m = @Query(SELECT FROM emp WHERE s = 1000 AND r = 'CEO';)@;
+    k = m;
+    n = k;
+    d = n;
+    y = d;
+    x = @Query(SELECT s FROM emp;)@;
+}
+out(x,usr);

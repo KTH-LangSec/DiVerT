@@ -1,0 +1,12 @@
+@Table(emp, n:str, r:str, s:int)@
+@Policy(SELECT n,s FROM emp; | SELECT n,r FROM emp; )@
+
+if (y == True) then
+{
+    x = @Query(SELECT n,s FROM emp WHERE s = 1000;)@;
+}
+else
+{
+    x = @Query(SELECT n,r FROM emp WHERE r = 'CEO';)@;
+}
+out(x,usr);

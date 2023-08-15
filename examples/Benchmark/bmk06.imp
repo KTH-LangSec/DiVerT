@@ -1,0 +1,22 @@
+@Table(emp, n:str, r:str, s:int)@
+@Policy(SELECT n,s FROM emp; | SELECT n,r FROM emp; )@
+
+if (y == True) then
+{
+    x = @Query(SELECT s FROM emp;)@;
+}
+else
+{
+    x = @Query(SELECT r FROM emp;)@;
+}
+out(x,usr);
+
+if (y == True) then
+{
+    x = @Query(SELECT s FROM emp;)@;
+}
+else
+{
+    x = @Query(SELECT r FROM emp;)@;
+}
+out(x,usr);
