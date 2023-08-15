@@ -122,10 +122,19 @@ class Gamma():
     def fix_point(self, _gamma):
         gamma = _gamma.copy()
         gamma_next = self.seq_composition(gamma, gamma)
-        while gamma != gamma_next:
+        while not self.equals(gamma,gamma_next):
+            gamma = gamma_next.copy()
             gamma_next = self.seq_composition(gamma_next, gamma_next)
 
         return gamma_next
+
+    ####### Check the equality of two environments #######
+    def equals(self, gamma_1, gamma_2):
+        for x in self.vars:
+            if (gamma_1[x] != gamma_2[x]):
+                return False
+
+        return True
 
     #######   #######
     # def __str__(self):
