@@ -1,7 +1,7 @@
 # DiVerT
 
 ## About
-DiVerT (**Di**sjunctive **Ver**ification using **T**ypes) is a prototype tool for verifying disjunctive security policies in database-backed application.
+DiVerT (**Di**sjunctive **Ver**ification with **T**ypes) is a prototype tool for verifying disjunctive security policies in database-backed application.
 
 ## Install
 - DiVerT requires [Z3](https://github.com/Z3Prover/z3) and its Python [bindings](https://pypi.org/project/z3-solver/). 
