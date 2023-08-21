@@ -24,3 +24,54 @@ You can run the benchmarks and the use cases using the following commnad:
 - Debug information, including the final Gamma environment, the observer's dependency set, program labels, and policy labels, can be displayed by specifying the `-d` argument.
 - In instances where the program is insecure, specifying the `-r` argument will provide insights into the reasons for the program's rejection.
 - The observer's identifier can be (optionally) defined using the `-o` argument. In this case (and by default) it is `usr`.
+
+### Example
+For example, benchmark number 10 is a simple insecure program with the following code:
+
+```
+@Table(emp, n:str, r:str, s:int)@
+@Policy(SELECT n,s FROM emp WHERE s > 1000; | SELECT n,r FROM emp; )@
+
+x = @Query(SELECT n FROM emp WHERE s > 0;)@;
+out(x,usr);
+```
+
+We can run this program with:
+
+`python main.py -i examples/Benchmark/bmk10.imp -r -d`
+
+The output of DiVerT for this program would looks like:
+
+```
+######################### DEBUG #########################
+Gamma final : 
+		pc ↦ { {'pc'} }
+		usr ↦ { {'pc', 'usr', Query<<SELECT n FROM emp WHERE s > 0;>>} }
+		x ↦ { {'pc', Query<<SELECT n FROM emp WHERE s > 0;>>} }
+
+usr's Dependency:
+		usr ↦ { {'pc', 'usr', Query<<SELECT n FROM emp WHERE s > 0;>>} }
+
+Program Labels : 
+		{ < {'emp'}, (s>0), {'n'} > }
+
+
+Policy Labels : 
+		{ < {'emp'}, true, {'n', 'r'} > }
+		{ < {'emp'}, (s>1000), {'n', 's'} > }
+
+
+######################### REASON(S) #########################
+Because: 
+	< {'emp'}, (s>0), {'n'} > ⋢ < {'emp'}, true, {'n', 'r'} >
+		Reason dep((s>0)) ∪ {'n'} ⊄ {'n', 'r'}
+
+	< {'emp'}, (s>0), {'n'} > ⋢ < {'emp'}, (s>1000), {'n', 's'} >
+		Reason (s>0) ⊭ (s>1000)
+
+######################### VERDICT #########################
+
+>>> The program is insecure. ⨉
+```
+
+Which clearly states that the program is insecure because none of the disjuncts of the policy allow query `SELECT n FROM emp WHERE s > 0`.
