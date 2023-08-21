@@ -1,0 +1,6 @@
+@Table(emp, n:str, r:str, s:int)@
+@Policy(SELECT n,s FROM emp WHERE s > 1000; | SELECT n,r FROM emp; )@
+
+
+x = @Query(SELECT n FROM emp WHERE s > 0;)@;
+out(x,usr);
