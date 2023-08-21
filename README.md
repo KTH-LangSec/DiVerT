@@ -40,7 +40,7 @@ We can run this program with:
 
 `python main.py -i examples/Benchmark/bmk10.imp -r -d`
 
-The output of DiVerT for this program would looks like:
+The output of DiVerT for this program would look like:
 
 ```
 ######################### DEBUG #########################
