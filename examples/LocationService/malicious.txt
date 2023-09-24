@@ -5,8 +5,16 @@
         SELECT userID, pName, distance FROM Distance WHERE userID=1 AND pName = 'mall'; SELECT userID, pName, distance FROM Distance WHERE userID=2 AND pName = 'restaurant'; |
         SELECT userID, pName, distance FROM Distance WHERE userID=1 AND pName = 'mall'; SELECT userID, pName, distance FROM Distance WHERE userID=2 AND pName = 'mall'; )@
 
-query = @Query(SELECT distance FROM Distance WHERE userID=1 AND pName = 'mall';)@;
-out(query,usr);
+if (USERID == 1) then
+{
+        query1 = @Query(SELECT distance FROM Distance WHERE userID=1 AND pName = 'mall';)@;
+        query2 = @Query(SELECT distance FROM Distance WHERE userID=1 AND pName = 'restaurant';)@;
+}
+else
+{
+        query1 = @Query(SELECT distance FROM Distance WHERE userID=2 AND pName = 'mall';)@;
+        query2 = @Query(SELECT distance FROM Distance WHERE userID=2 AND pName = 'restaurant';)@;
+}
 
-query = @Query(SELECT distance FROM Distance WHERE userID=1 AND pName = 'restaurant';)@;
-out(query,usr);
+out(query1,usr);
+out(query2,usr);

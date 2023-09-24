@@ -4,5 +4,14 @@
         SELECT zip, gender FROM Patients; |
         SELECT zip, disease FROM Patients; )@
 
-query = @Query(SELECT disease FROM Patients WHERE gender = 'F' AND zip = 10001;)@;
+
+if (gender = 'F') then
+{
+        query = @Query(SELECT disease FROM Patients WHERE gender = 'F' AND zip = 10001;)@;
+}
+else
+{
+        query = @Query(SELECT zip FROM Patients WHERE gender = 'M';)@;
+}
+
 out(query,usr);
