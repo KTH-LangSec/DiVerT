@@ -1,0 +1,23 @@
+@Table(emp, n:str, r:str, s:int)@
+@Policy(SELECT n,s FROM emp; | SELECT n,r FROM emp; )@
+
+x = @Query(SELECT FROM emp WHERE n = 'Alice';)@;
+if (x == True) then
+{
+    y = @Query(SELECT FROM emp WHERE r = 'CTO';)@;
+}
+else
+{
+    y = @Query(SELECT FROM emp WHERE r = 'CEO';)@;
+}
+
+if (y == True) then
+{
+    w = @Query(SELECT r FROM emp WHERE n = 'Eve';)@;
+}
+else
+{
+    w = @Query(SELECT r FROM emp WHERE n = 'Bob';)@;
+}
+
+out(w,usr);
