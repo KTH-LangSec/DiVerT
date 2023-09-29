@@ -14,7 +14,7 @@ DiVerT (**Di**sjunctive **Ver**ification with **T**ypes) is a prototype tool for
 
 ## Running the use cases
 
-You can run the benchmarks and the use cases using the following commnad:
+You can run the tests or the use cases using the following commnad:
 
 `python main.py -i examples/DataPublishing/get_data.txt -d -r -o usr`
 
@@ -26,7 +26,7 @@ You can run the benchmarks and the use cases using the following commnad:
 - The observer's identifier can be (optionally) defined using the `-o` argument. In this case (and by default) it is `usr`.
 
 ### Example
-For example, benchmark number 10 is a simple insecure program with the following code:
+For example, test number 10 is a simple insecure program with the following code:
 
 ```
 @Table(emp, n:str, r:str, s:int)@
@@ -38,7 +38,7 @@ out(x,usr);
 
 We can run this program with:
 
-`python main.py -i examples/Benchmark/bmk10.imp -r -d`
+`python main.py -i examples/Tests/test10.imp -r -d`
 
 The output of DiVerT for this program would look like:
 
