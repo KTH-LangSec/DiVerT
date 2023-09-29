@@ -1,0 +1,7 @@
+@Table(emp, n:str, r:str, s:int)@
+@Table(mng, m:str, d:str)@
+@Policy(SELECT n,r FROM emp; | SELECT n,s FROM emp; )@
+
+
+x = @Query(SELECT n,r,s FROM emp;)@;
+out(x,usr);
