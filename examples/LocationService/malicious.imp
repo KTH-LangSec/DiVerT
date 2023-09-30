@@ -7,14 +7,11 @@
 
 if (USERID == 1) then
 {
-        query1 = @Query(SELECT distance FROM Distance WHERE userID=1 AND pName = 'mall';)@;
-        query2 = @Query(SELECT distance FROM Distance WHERE userID=1 AND pName = 'restaurant';)@;
+    query = @Query(SELECT distance FROM Distance WHERE userID=1;)@;
 }
 else
 {
-        query1 = @Query(SELECT distance FROM Distance WHERE userID=2 AND pName = 'mall';)@;
-        query2 = @Query(SELECT distance FROM Distance WHERE userID=2 AND pName = 'restaurant';)@;
+    query = @Query(SELECT distance FROM Distance WHERE userID=2;)@;
 }
 
-out(query1,usr);
-out(query2,usr);
+out(query,usr);
