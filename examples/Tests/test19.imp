@@ -1,0 +1,16 @@
+@Table(emp, n:str, r:str, s:int)@
+@Table(mng, m:str, d:str)@
+@Policy(SELECT n,s FROM emp;SELECT m FROM mng; | SELECT n,r FROM emp;SELECT m FROM mng; )@
+
+x = @Query(SELECT FROM emp WHERE n = 'Alice';)@;
+
+if (x == True) then
+{
+    y = @Query(SELECT s FROM emp,mng WHERE m = n ;)@;
+    out(y,usr);
+}
+else
+{
+    z = @Query(SELECT r FROM emp,mng WHERE m = n ;)@;
+    out(z,usr);
+}
