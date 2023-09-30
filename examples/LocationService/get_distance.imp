@@ -8,7 +8,7 @@
 
 if (USERID == 1) then
 {
-        if (INTRESET == 'mall') then
+        if (INTEREST == 'mall') then
         {
                 query = @Query(SELECT distance FROM Distance WHERE userID=1 AND pName = 'mall';)@;
         }
@@ -19,7 +19,7 @@ if (USERID == 1) then
 }
 else
 {
-        if (INTRESET == 'mall') then
+        if (INTEREST == 'mall') then
         {
                 query = @Query(SELECT distance FROM Distance WHERE userID=2 AND pName = 'mall';)@;
         }
