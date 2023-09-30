@@ -78,7 +78,9 @@ def generate_joins(_label):
 
     for st_set in power_set:
         if (st_set and is_disjoint(st_set)):
-            result_set.add(generate_merged_st(st_set))
+            tmp_st = generate_merged_st(st_set)
+            if (is_well_formed(tmp_st)):
+                result_set.add(tmp_st)
 
     return result_set
 
