@@ -92,13 +92,11 @@ def is_disjoint(_st_set):
     if (len(_st_set) == 1):
         return True
 
-    list_of_get_table_names = []
+    list_of_table_names = []
     for st in _st_set:
-        list_of_get_table_names.append(st.table_names)
-    
-    intersection = not all(list_of_get_table_names[0].intersection(*list_of_get_table_names[1:]))
-        
-    return intersection
+        list_of_table_names.append(st.table_names)
+
+    return are_disjoint_sets(list_of_table_names)
 
 
 def generate_merged_st(_sts):
@@ -113,3 +111,10 @@ def generate_merged_st(_sts):
             total_phi.append(exp)
 
     return st_lib.SymbolicTuple(total_columns, total_table_names, total_phi)
+
+def are_disjoint_sets(set_list):
+    for i in range(len(set_list)):
+        for j in range(i + 1, len(set_list)):
+            if not set_list[i].isdisjoint(set_list[j]):
+                return False
+    return True
