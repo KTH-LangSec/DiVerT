@@ -6,7 +6,7 @@ DiVerT (**Di**sjunctive **Ver**ification with **T**ypes) is a prototype tool for
 ## Install
 - DiVerT requires [Z3](https://github.com/Z3Prover/z3) and its Python [bindings](https://pypi.org/project/z3-solver/). 
 
-- To begin, you should [Install](https://github.com/Z3Prover/z3/releases) Z3 on your platform, make sure it is in your path, and then proceed to install [z3-solver](https://pypi.org/project/z3-solver/) bindings using the command `pip install z3-solver`. 
+- To begin, you should [Install Z3](https://github.com/Z3Prover/z3/releases) on your platform, make sure it is in your PATH, and then proceed to install [z3-solver](https://pypi.org/project/z3-solver/) bindings using the command `pip install z3-solver`. 
 
 - DiVerT was tested and is known to work with Z3 version 4.8.7.
 
