@@ -46,6 +46,13 @@ class Lexer:
         return _result
 
     #######
+    def skip_comment(self):
+        self.read_char()
+        _position = self.curr_pos
+        while (self.ch != "\n"):
+            self.read_char()
+
+    #######
     def read_number(self):
         _position = self.curr_pos
         _result = ""
@@ -76,6 +83,9 @@ class Lexer:
     #######
     def next_token(self):
         self.skip_white_spaces()
+
+        if (self.ch == "#"):
+            self.skip_comment()
 
         match self.ch:
             case "@":
